@@ -1,4 +1,14 @@
-.log
-.pyc
-.env
-.venv
+# Fichiers et dossiers Python compilés
+__pycache__/
+*.py[cod]
+*.so
+
+# Environnements virtuels
+.venv/
+venv/
+ENV/
+env/
+*.env
+
+# Fichiers de log
+*.log
