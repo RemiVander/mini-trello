@@ -10,8 +10,6 @@
 
 # Chaque module est développé dans une branche feature/..., puis fusionné dans develop après revue de code par un pair.
 
-from boards import list_boards, add_board, remove_board
-
 def list_lists(board):
     """
     Affiche la liste des listes d'un tableau donné.
