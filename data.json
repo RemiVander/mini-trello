@@ -1,0 +1,44 @@
+{
+    "boards": [
+      {
+        "name": "Projet Python",
+        "lists": [
+          {
+            "name": "À faire",
+            "cards": [
+              "Écrire le module boards",
+              "Préparer la structure JSON"
+            ]
+          },
+          {
+            "name": "En cours",
+            "cards": [
+              "Coder le module lists"
+            ]
+          },
+          {
+            "name": "Terminé",
+            "cards": [
+              "Initialiser le dépôt Git"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Projet Marketing",
+        "lists": [
+          {
+            "name": "Idées",
+            "cards": [
+              "Créer une campagne email"
+            ]
+          },
+          {
+            "name": "À valider",
+            "cards": []
+          }
+        ]
+      }
+    ]
+  }
+  
