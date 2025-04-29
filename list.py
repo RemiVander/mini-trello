@@ -10,6 +10,7 @@
 
 # Chaque module est développé dans une branche feature/..., puis fusionné dans develop après revue de code par un pair.
 
+from board import list_boards, add_board, remove_board
 
 def list_lists(board):
     """
@@ -54,3 +55,7 @@ def remove_list(board, list_index):
 
     removed_list = board["lists"].pop(list_index)
     print(f"Liste '{removed_list['name']}' supprimée du tableau '{board['name']}'.")
+
+
+
+    
