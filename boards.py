@@ -1,64 +1,30 @@
-# Le projet suiavnt consiste à développer un mini-Trello en ligne de commande, entièrement basé sur des fonctions et sans recours à la POO,
-# afin de familiariser un groupe de trois apprenants Python avec un véritable workflow Git (Git Flow).
-# Les données seront stockées dans un unique fichier JSON (data.json) : on y gère des « boards »,
-# chaque board contenant plusieurs « lists » (colonnes) et chaque list une collection de « cards » (éléments).
-# Les apprenants travailleront en parallèle sur trois modules distincts :
+from utils import load_data, save_data
 
-# Boards (création, suppression, listing)
-# Lists (ajout, suppression, listing au sein d’un board)
-# Cards (ajout, suppression, déplacement entre lists, listing)
+def create_board(name):
+    data = load_data()
+    if any(board["name"] == name for board in data["boards"]):
+        print(f" Le board '{name}' existe déjà.")
+        return
+    data["boards"].append({"name": name, "lists": []})
+    save_data(data)
+    print(f" Board '{name}' créé.")
 
-# Chaque module est développé dans une branche feature/..., puis fusionné dans develop après revue de code par un pair.
+def delete_board(name):
+    data = load_data()
+    original_len = len(data["boards"])
+    data["boards"] = [board for board in data["boards"] if board["name"] != name]
+    if len(data["boards"]) == original_len:
+        print(f" Board '{name}' introuvable.")
+    else:
+        save_data(data)
+        print(f" Board '{name}' supprimé.")
 
-
-def create_board(board_name):
-    """
-    Crée un nouveau tableau avec le nom donné.
-
-    Args:
-        board_name (str): Le nom du tableau à créer.
-    """
-    new_board = {"name": board_name, "lists": []}
-    return new_board
-
-def list_boards(boards):
-    """
-    Affiche la liste des tableaux.
-    Args:
-        boards (list): La liste des tableaux.
-    """
+def list_boards():
+    data = load_data()
+    boards = data.get("boards", [])
     if not boards:
-        print("Aucun tableau disponible.")
+        print("📭 Aucun board disponible.")
         return
-
-    print("Tableaux disponibles :")
-    for i, board in enumerate(boards, start=1):
-        print(f"{i}. {board['name']}")
-
-
-def add_board(boards, board_name):
-    """
-    Ajoute un nouveau tableau à la liste des tableaux.
-
-    Args:
-        boards (list): La liste des tableaux.
-        board_name (str): Le nom du nouveau tableau.
-    """
-    new_board = {"name": board_name, "lists": []}
-    boards.append(new_board)
-    print(f"Tableau '{board_name}' ajouté.")
-
-
-def delete_board(boards, board_index):
-    """
-    Supprime un tableau de la liste des tableaux.
-    Args:
-        boards (list): La liste des tableaux.
-        board_index (int): L'index du tableau à supprimer.
-    """
-    if board_index < 0 or board_index >= len(boards):
-        print("Index de tableau invalide.")
-        return
-
-    removed_board = boards.pop(board_index)
-    print(f"Tableau '{removed_board['name']}' supprimé.")
+    print(" Boards existants :")
+    for board in boards:
+        print(f" - {board['name']}")
